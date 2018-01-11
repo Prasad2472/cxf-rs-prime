@@ -11,6 +11,8 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.assement.exception.InvalidNumbersException;
+import in.assement.exception.PossitiveNumberException;
 import in.assement.model.PrimeResponse;
 
 /**
@@ -25,10 +27,13 @@ public class PrimeServiceImpl implements PrimeService {
 	@Override
 	public Response findPrimeNumbers(final Integer start, final Integer end) {
 		final PrimeResponse model = new PrimeResponse();
-		if (start < 0 || end < 0 || end < start) {
-			model.setMsg(generateFailureMessage(start, end, ""));
-			return Response.status(Status.BAD_REQUEST).entity(model).build();
+		if (start < 0 || end < 0) {
+			throw new PossitiveNumberException("Please Provide Positive Numbers..!");
 		}
+		if (end < start) {
+			throw new InvalidNumbersException("start:" + start + " end:" + end + " numbers are invalid..!");
+		}
+
 		final List<Integer> listOfPrimeNumbers = primeNumberHelper.getPrimeNumbers(start, end);
 		model.setPrimeNumbers(listOfPrimeNumbers);
 		model.setMsg(generateSuccessMessage(start, end, listOfPrimeNumbers.size(), ""));

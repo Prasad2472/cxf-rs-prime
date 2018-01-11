@@ -7,7 +7,7 @@
 
 	<context:property-placeholder />
 	<context:annotation-config />
-	<context:component-scan base-package="in.assement.service"/>
+	<context:component-scan base-package="in.assement.service" />
 
 
 	<!-- <bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer"/> 
@@ -18,9 +18,10 @@
 
 	<!-- to support Java-to-XML and vice-versa conversion -->
 	<bean id="jaxbXmlProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
+	<bean id="customExceptionMapper" class="in.assement.exception.CustomExceptionMapper">
+	</bean>
 	<!-- basePackages to Auto Configure the REST service -->
-	<jaxrs:server id="services" address="/test"
-		basePackages="in.assement.service">
+	<jaxrs:server id="services" address="/test" basePackages="in.assement.service">
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" /> <!-- use .json to get data in JSON format -->
 			<entry key="xml" value="application/xml" />   <!-- use .xml to get data in XML format -->
@@ -28,6 +29,7 @@
 		<jaxrs:providers>
 			<ref bean="jsonProvider" />
 			<ref bean="jaxbXmlProvider" />
+			<ref bean="customExceptionMapper" />
 		</jaxrs:providers>
 	</jaxrs:server>
 </beans>
