@@ -43,6 +43,11 @@
 			<version>4.3.12.RELEASE</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-service-description</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
@@ -157,6 +162,38 @@
 							<goals>
 								<goal>verify</goal>
 							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-java2wadl-plugin</artifactId>
+					<version>3.0.0</version>
+					<executions>
+						<!-- Enable if support for Javadoc is required, not supported in CXF 
+							2.7.11 -->
+						<execution>
+							<id>parsejavadoc</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>parsejavadoc</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>process-classes</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>java2wadl</goal>
+							</goals>
+							<configuration>
+								<classResourceNames>
+									<classResourceName>in.assement.service.PrimeService</classResourceName>
+								</classResourceNames>
+								<!-- Enable if support for Javadoc is required, not supported in 
+									CXF 2.7.11 -->
+								<docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
+								<attachWadl>true</attachWadl>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>

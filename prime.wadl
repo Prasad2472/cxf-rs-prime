@@ -1,0 +1,29 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <grammars></grammars>
+    <resources base="http://localhost:8080/cxf-jax-rs/test">
+        <resource path="/prime">
+            <resource path="/findAllPrimeNumbers">
+                <method name="GET">
+                    <request>
+                        <param name="start" style="query" type="xs:int"/>
+                        <param name="end" style="query" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getPrimeNumbers">
+                <method name="GET">
+                    <request>
+                        <param name="pageNumber" style="query" type="xs:int"/>
+                        <param name="noOfElementsPerpage" style="query" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>
