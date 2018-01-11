@@ -16,7 +16,9 @@ public class CustomExceptionMapper implements ExceptionMapper<RuntimeException> 
 
 	@Override
 	public Response toResponse(RuntimeException exception) {
-		return Response.status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity(exception.getMessage()).build();
+
+		Exception exception2 = new Exception(exception.getMessage(), 400);
+		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).entity(exception2).build();
 	}
 
 }
