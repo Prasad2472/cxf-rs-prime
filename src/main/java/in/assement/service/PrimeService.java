@@ -23,12 +23,12 @@ public interface PrimeService {
 	@GET
 	@Path("/findAllPrimeNumbers")
 	@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	Response findPrimeNumbers(@QueryParam("start") Integer start, @QueryParam("end") Integer end);
 
 	@GET
 	@Path("/getPrimeNumbers")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes(MediaType.TEXT_PLAIN)
 	Response getPrimeNumbers(@QueryParam("pageNumber") Integer pageNumber,
 			@QueryParam("noOfElementsPerpage") Integer noOfElementsPerpage);

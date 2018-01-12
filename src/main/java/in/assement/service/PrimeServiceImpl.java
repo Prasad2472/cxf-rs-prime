@@ -28,10 +28,10 @@ public class PrimeServiceImpl implements PrimeService {
 	public Response findPrimeNumbers(final Integer start, final Integer end) {
 		final PrimeResponse model = new PrimeResponse();
 		if (start < 0 || end < 0) {
-			throw new PossitiveNumberException("Please Provide Positive Numbers..!");
+			throw new PossitiveNumberException("Please Provide Positive Numbers..!", 400);
 		}
 		if (end < start) {
-			throw new InvalidNumbersException("start:" + start + " end:" + end + " numbers are invalid..!");
+			throw new InvalidNumbersException("start:" + start + " end:" + end + " numbers are invalid..!", 400);
 		}
 
 		final List<Integer> listOfPrimeNumbers = primeNumberHelper.getPrimeNumbers(start, end);
